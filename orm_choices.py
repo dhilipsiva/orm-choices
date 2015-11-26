@@ -34,3 +34,11 @@ def choices(klass):
         _choices.append((val[0], val[1]))
     setattr(klass, 'CHOICES', tuple(_choices))
     return klass
+
+
+def choices_with_unknown(klass):
+    """
+    Also add an `UNKNOWN` attribute to the class (Value for unknown: -1)
+    """
+    klass.Meta.UNKNOWN = [-1, "Unknown"]
+    return choices(klass)

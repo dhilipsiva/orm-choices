@@ -35,7 +35,7 @@ except ImportError:
 
 setup(
     name='orm-choices',
-    version='0.1.0',
+    version='0.2.0',
     description=(
         "A helpful decorator for choice fields"
         " (Django choices or SQLAlchemy ChoiceType)"),
