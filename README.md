@@ -37,7 +37,7 @@ Introducing `choices`:
 
 ```python
 
-from choices import choices
+from orm_choices import choices
 
 @choices
 class ConferenceStatus:
@@ -55,7 +55,7 @@ class Conference(Model):
 		choices=ConferenceStatus.CHOICES)
 ```
 
-What did just happen? Crazy (not really). I know, right! Declare all your variables in `Meta` class (within `ConferenceStatus`). And apply the `choices` decorator to `ConferenceStatus` class. And boom! Your `ConferenceStatus` now has these attributes:
+What did just happen? Crazy (not really). I know, right! Declare all your variables in `Meta` class (within `ConferenceStatus`). And apply the `orm_choices` decorator to `ConferenceStatus` class. And boom! Your `ConferenceStatus` now has these attributes:
 
 ```python
 ConferenceStatus.ACCEPTING_CFP  # This will return `1`

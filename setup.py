@@ -34,7 +34,7 @@ except ImportError:
     long_description = open(f, 'r').read()
 
 setup(
-    name='choices',
+    name='orm-choices',
     version='0.1.0',
     description=(
         "A helpful decorator for choice fields"
@@ -61,7 +61,7 @@ setup(
 
     keywords='django orm sqlalchemy choices',
     packages=find_packages(),
-    py_modules=['choices'],
+    py_modules=['orm_choices'],
     entry_points='''''',
     install_requires=[],
     extras_require={
