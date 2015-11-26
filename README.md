@@ -1,7 +1,7 @@
-# choices
+# ORM Choices
 A helpful decorator for choice fields (Django choices or SQLAlchemy ChoiceType). Do choices the pythonic way.
 
-## Why create choices?
+## Why create ORM Choices?
 
 I got sick and tired of using `choice` fields in Django ORM and SQLAlchemy. [Look here for a context](https://github.com/pythonindia/junction/issues/302)
 
