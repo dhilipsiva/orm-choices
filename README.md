@@ -55,7 +55,7 @@ class Conference(Model):
 		choices=ConferenceStatus.CHOICES)
 ```
 
-What did just happen? Crazy (not really). I know, right! Declare all your variables in `Meta` class (within `ConferenceStatus`). And apply the `choices` decorator to `ConferenceStatus` class. And boom. Your `ConferenceStatus` now has these attributes:
+What did just happen? Crazy (not really). I know, right! Declare all your variables in `Meta` class (within `ConferenceStatus`). And apply the `choices` decorator to `ConferenceStatus` class. And boom! Your `ConferenceStatus` now has these attributes:
 
 ```python
 ConferenceStatus.ACCEPTING_CFP  # This will return `1`
@@ -69,5 +69,6 @@ And it will add a new `CHOICES` attribute too.
 print(ConferenceStatus.CHOICES)
 # Will Print
 ((1, "Accepting Proposals"), (2, "Proposal submission closed"), (3, "Accepting Votes"), (4, "Schedule Published"))
-
 ```
+
+Clean and DRY!
