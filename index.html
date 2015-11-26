@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Orm-choices by dhilipsiva</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Orm-choices</h1>
+        <h2>A helpful decorator for choice fields (Django choices or SQLAlchemy ChoiceType). Do choices the pythonic way.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/dhilipsiva/orm-choices/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/dhilipsiva/orm-choices/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/dhilipsiva/orm-choices" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="orm-choices" class="anchor" href="#orm-choices" aria-hidden="true"><span class="octicon octicon-link"></span></a>ORM Choices</h1>
+
+<p>A helpful decorator for choice fields (Django choices or SQLAlchemy ChoiceType). Do choices the pythonic way.</p>
+
+<h2>
+<a id="why-create-orm-choices" class="anchor" href="#why-create-orm-choices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why create ORM Choices?</h2>
+
+<p>I got sick and tired of using <code>choice</code> fields in Django ORM and SQLAlchemy. <a href="https://github.com/pythonindia/junction/issues/302">Look here for a context</a></p>
+
+<p>For example:</p>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-c"># Conference Application Choice Fields</span>
+CONFERENCE_STATUS_ACCEPTING_CFP <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Accepting Proposals<span class="pl-pds">"</span></span>
+CONFERENCE_STATUS_CLOSED_CFP <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Proposal submission closed<span class="pl-pds">"</span></span>
+CONFERENCE_STATUS_ACCEPTING_VOTES <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Accepting Votes<span class="pl-pds">"</span></span>
+CONFERENCE_STATUS_SCHEDULE_PUBLISHED <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Schedule Published<span class="pl-pds">"</span></span>
+
+CONFERENCE_STATUS_LIST <span class="pl-k">=</span> ((<span class="pl-c1">1</span>, CONFERENCE_STATUS_ACCEPTING_CFP),
+                          (<span class="pl-c1">2</span>, CONFERENCE_STATUS_CLOSED_CFP),
+                          (<span class="pl-c1">3</span>, CONFERENCE_STATUS_ACCEPTING_VOTES),
+                          (<span class="pl-c1">4</span>, CONFERENCE_STATUS_SCHEDULE_PUBLISHED),
+                          )
+
+<span class="pl-c"># Using it in a model:</span>
+
+<span class="pl-k">class</span> <span class="pl-en">Conference</span>(<span class="pl-e">Model</span>):
+    status <span class="pl-k">=</span> models.PositiveSmallIntegerField(
+        <span class="pl-smi">default</span><span class="pl-k">=</span><span class="pl-c1">1</span>, <span class="pl-smi">choices</span><span class="pl-k">=</span>CONFERENCE_STATUS_LIST)</pre></div>
+
+<p>I have no Idea what 1 is (I mean its not really obvious that it means <code>CONFERENCE_STATUS_ACCEPTING_CFP</code> when <code>CONFERENCE_STATUS_LIST</code> is declared in some other file).</p>
+
+<p>I needed a clean and DRY way of making use of Choice Fields.</p>
+
+<p>Introducing <code>choices</code>:</p>
+
+<div class="highlight highlight-source-python"><pre>
+<span class="pl-k">from</span> orm_choices <span class="pl-k">import</span> choices
+
+<span class="pl-en">@choices</span>
+<span class="pl-k">class</span> <span class="pl-en">ConferenceStatus</span>:
+    <span class="pl-k">class</span> <span class="pl-en">Meta</span>:
+        ACCEPTING_CFP <span class="pl-k">=</span> [<span class="pl-c1">1</span>, <span class="pl-s"><span class="pl-pds">"</span>Accepting Proposals<span class="pl-pds">"</span></span>]
+        CLOSED_CFP <span class="pl-k">=</span> [<span class="pl-c1">2</span>, <span class="pl-s"><span class="pl-pds">"</span>Proposal submission closed<span class="pl-pds">"</span></span>]
+        ACCEPTING_VOTES <span class="pl-k">=</span> [<span class="pl-c1">3</span>, <span class="pl-s"><span class="pl-pds">"</span>Accepting Votes<span class="pl-pds">"</span></span>]
+        SCHEDULE_PUBLISHED <span class="pl-k">=</span> [<span class="pl-c1">4</span>, <span class="pl-s"><span class="pl-pds">"</span>Schedule Published<span class="pl-pds">"</span></span>]
+
+<span class="pl-c"># Using it in a model:</span>
+
+<span class="pl-k">class</span> <span class="pl-en">Conference</span>(<span class="pl-e">Model</span>):
+    status <span class="pl-k">=</span> models.PositiveSmallIntegerField(
+        <span class="pl-smi">default</span><span class="pl-k">=</span>ConferenceStatus.ACCEPTING_CFP,
+        <span class="pl-smi">choices</span><span class="pl-k">=</span>ConferenceStatus.CHOICES)</pre></div>
+
+<p>What did just happen? Crazy (not really). I know, right! Declare all your variables in <code>Meta</code> class (within <code>ConferenceStatus</code>). And apply the <code>orm_choices</code> decorator to <code>ConferenceStatus</code> class. And boom! Your <code>ConferenceStatus</code> now has these attributes:</p>
+
+<div class="highlight highlight-source-python"><pre>ConferenceStatus.ACCEPTING_CFP  <span class="pl-c"># This will return `1`</span>
+ConferenceStatus.ACCEPTING_VOTES  <span class="pl-c"># This will return `2`</span>
+
+<span class="pl-c"># And so on...</span></pre></div>
+
+<p>And it will add a new <code>CHOICES</code> attribute too.</p>
+
+<pre><code>print(ConferenceStatus.CHOICES)
+# Will Print
+((1, "Accepting Proposals"), (2, "Proposal submission closed"), (3, "Accepting Votes"), (4, "Schedule Published"))
+</code></pre>
+
+<p>Clean and DRY!</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
