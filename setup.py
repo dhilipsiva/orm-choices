@@ -40,7 +40,7 @@ setup(
         "A helpful decorator for choice fields"
         " (Django choices or SQLAlchemy ChoiceType)"),
     long_description=long_description,
-    url='https://github.com/dhilipsiva/choices',
+    url='https://github.com/dhilipsiva/orm-choices',
     author='dhilipsiva',
     author_email='dhilipsiva@gmail.com',
     license='MIT',
