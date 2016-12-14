@@ -10,11 +10,6 @@
 File name: setup.py
 Version: 0.1
 Author: dhilipsiva <dhilipsiva@gmail.com>
-"""
-__author__ = "dhilipsiva"
-__status__ = "development"
-
-"""
 A helpful decorator for choice fields (Django choices or SQLAlchemy ChoiceType)
 """
 
@@ -35,7 +30,7 @@ except ImportError:
 
 setup(
     name='orm-choices',
-    version='0.2.0',
+    version='0.2.1',
     description=(
         "A helpful decorator for choice fields"
         " (Django choices or SQLAlchemy ChoiceType)"),

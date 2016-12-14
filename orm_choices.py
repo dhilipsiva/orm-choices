@@ -42,3 +42,10 @@ def choices_with_unknown(klass):
     """
     klass.Meta.UNKNOWN = [-1, "Unknown"]
     return choices(klass)
+
+
+def is_valid_choice(klass, value):
+    for kv in klass.CHOICES:
+        if kv[0] == value:
+            return True
+    return False
