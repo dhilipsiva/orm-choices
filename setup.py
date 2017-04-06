@@ -14,23 +14,18 @@ A helpful decorator for choice fields (Django choices or SQLAlchemy ChoiceType)
 """
 
 from setuptools import setup, find_packages
-from codecs import open
 from os import path
 
 here = path.abspath(path.dirname(__file__))
 f = path.join(here, 'README.md')
 
-try:
-    from pypandoc import convert
-    long_description = convert(f, 'rst')
-except ImportError:
-    print(
-        "pypandoc module not found, could not convert Markdown to RST")
-    long_description = open(f, 'r').read()
-
+long_description = """
+A helpful decorator for choice field (Django choices or SQLAlchemy ChoiceType).
+Do choices the pythonic way.
+"""
 setup(
     name='orm-choices',
-    version='0.2.1',
+    version='0.2.2',
     description=(
         "A helpful decorator for choice fields"
         " (Django choices or SQLAlchemy ChoiceType)"),
