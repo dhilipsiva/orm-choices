@@ -44,8 +44,23 @@ def choices_with_unknown(klass):
     return choices(klass)
 
 
-def is_valid_choice(klass, value):
-    for kv in klass.CHOICES:
-        if kv[0] == value:
+class InvalidValueError(Exception):
+    pass
+
+
+class ChoiceUtils:
+
+    @classmethod
+    def lookup(klass, value):
+        for _value, _key in klass.CHOICES:
+            if _value == value:
+                return _key
+        raise InvalidValueError()
+
+    @classmethod
+    def is_valid_choice(klass, value):
+        try:
+            klass.lookup(value)
             return True
-    return False
+        except InvalidValueError:
+            return False
