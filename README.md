@@ -1,5 +1,6 @@
 # ORM Choices
-A helpful decorator for choice fields (Django choices or SQLAlchemy ChoiceType). Do choices the pythonic way.
+
+Helpful decorators + utils for choice fields (Django choices or SQLAlchemy ChoiceType). Do choices the pythonic way.
 
 ## Why create ORM Choices?
 
@@ -77,7 +78,6 @@ Clean and DRY!
 
 ### Curreny Codes
 
-```
+```python
 from orm_choices.utils.currency_code import CurrencyCode
-
 ```
