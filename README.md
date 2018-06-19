@@ -72,3 +72,12 @@ print(ConferenceStatus.CHOICES)
 ```
 
 Clean and DRY!
+
+## Utils
+
+### Curreny Codes
+
+```
+from orm_choices.utils.currency_code import CurrencyCode
+
+```
