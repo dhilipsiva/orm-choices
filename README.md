@@ -81,3 +81,9 @@ Clean and DRY!
 ```python
 from orm_choices.utils.currency_code import CurrencyCode
 ```
+
+### Blood Types
+
+```python
+from orm_choices.utils.blood_type import BloodType
+```
