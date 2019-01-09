@@ -25,7 +25,7 @@ Do choices the pythonic way.
 """
 setup(
     name='orm-choices',
-    version='1.0.0',
+    version='1.0.1',
     description=(
         "A helpful decorator for choice fields"
         " (Django choices or SQLAlchemy ChoiceType)"),
